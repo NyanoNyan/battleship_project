@@ -3,6 +3,7 @@ const Ship = (name, placedLoc, length) => {
     const getName = () => name;
     const getPlaceLoc = () => placedLoc;
     const getLength = () => length;
+    const getHits = () => hits;
 
     // takes a number and marks that position as a "hit"
     const hit = (hitLoc) => {
@@ -11,9 +12,25 @@ const Ship = (name, placedLoc, length) => {
 
     // Calculates based on it's length and whether all of the position
     // of that particular shit have been hit.
-    const isSunk = (checkSunk) => {
+    const isSunk = () => {
         // if hits == length then sunk
-        return 
+
+        // Get unique items
+        const uniqueValues = new Set([...getHits(), ...getPlaceLoc()]);
+        if (getHits().length !== getPlaceLoc().length) {
+            return false;
+        }
+        // Loop over each unique values and compare it with each item in an array.
+        // If the lengths of both count are the same since, return true. Since we are checking 
+        // if each unique items are in the two arrays first then checking if the len are the same.
+        for (const v of uniqueValues) {
+            const hitCount = getHits().filter(e => e === v).length;
+            const locCount = getPlaceLoc().filter(e => e === v).length;
+            if (hitCount !== locCount) {
+                return false;
+            }
+            return true;
+        }
     }
 
     return {
@@ -22,6 +39,7 @@ const Ship = (name, placedLoc, length) => {
         getName,
         getPlaceLoc,
         getLength,
+        getHits,
     }
 
 };
@@ -43,12 +61,14 @@ const GameBoard = (ship) => {
         {Cruiser: ["A1", "A2", "A3"]},
         {Submarine: ["B1", "B2" , "B3"]},
     ]
-
+    const cruiser = Ship("Curiser", ["A1", "A2", "A3"], 3);
     let shipss = [
-        Ship("Curiser", ["A1", "A2", "A3"], 3),
-        Ship("Submarine", ["B1", "B2" , "B3"], 3)
+        cruiser,
     ]
 
+    const showShips = () => {
+        return shipss
+    }
 
     const createBoard = () => {
 
@@ -57,13 +77,12 @@ const GameBoard = (ship) => {
     // the "hit" function to the correct ship.
     // Or it records the coordinates of the missed shot.
     const receiveAttack = (coordinates) => {
-        const selectedShip = ships.filter((obj) => {
-            let keyObj = Object.keys(obj);
-            if (obj[keyObj].includes(coordinates)){
-                return [obj];
+        shipss.filter((obj) => {
+            if (obj.getPlaceLoc().includes(coordinates)){
+                obj.hit(coordinates);
+                return obj.getPlaceLoc();
             }
         })
-        return selectedShip;
     };
 
     const checkAllSunk = () => {
@@ -73,6 +92,7 @@ const GameBoard = (ship) => {
     return {
         createBoard,
         receiveAttack,
+        showShips
     }
 
 };
@@ -82,7 +102,8 @@ const Player = () => {
 };
 
 module.exports = {
-    GameBoard
+    GameBoard,
+    Ship,
 }
 
 // 10 * 10 grid
@@ -96,3 +117,6 @@ module.exports = {
 
 // Need to re-read instructions again.
 const shipOrder = ["Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"];
+
+/// comparing two arrays in JavaScript
+// https://www.30secondsofcode.org/blog/s/javascript-array-comparison
