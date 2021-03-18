@@ -35,3 +35,12 @@ describe("Ships Checks", () => {
 
 })
 
+describe("GameBoard Checks", () => {
+    describe("place ships check", () => {
+        test("Create new object ships", () => {
+            const board = GameBoard()
+            const showShips = board.placeShips("Cruiser", ["A1", "A2", "A3"], 3);
+            expect(showShips[0].getPlaceLoc()).toEqual(["A1", "A2", "A3"]);
+        })
+    })
+})

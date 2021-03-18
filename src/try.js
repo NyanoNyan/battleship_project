@@ -55,24 +55,15 @@ const Ship = (name, placedLoc, length) => {
 
 const GameBoard = (ship) => {
     let missedShots = [];
+    let shipsObjs = [];
 
-    // How to structure this data, to filter it out for later on.
-    let ships = [
-        {Cruiser: ["A1", "A2", "A3"]},
-        {Submarine: ["B1", "B2" , "B3"]},
-    ]
-    const cruiser = Ship("Curiser", ["A1", "A2", "A3"], 3);
-    let shipss = [
-        cruiser,
-    ]
-
-    const showShips = () => {
-        return shipss
+    // Check todo list project, how you made a list of objects.
+    const placeShips = (name, location, length) => {
+        const newShip = Ship(name, location, length);
+        shipsObjs.push(newShip);
+        return shipsObjs;
     }
 
-    const createBoard = () => {
-
-    };
     // determines whether or not not the attack hit and sends
     // the "hit" function to the correct ship.
     // Or it records the coordinates of the missed shot.
@@ -90,9 +81,8 @@ const GameBoard = (ship) => {
     };
 
     return {
-        createBoard,
+        placeShips,
         receiveAttack,
-        showShips
     }
 
 };
