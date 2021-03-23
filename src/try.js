@@ -91,7 +91,6 @@ const GameBoard = (ship) => {
         shipsObjs.map((obj) => {
             sunkArray.push(obj.isSunk());
         })
-        
         return sunkArray.every(arr => arr === true);
     };
 
@@ -105,11 +104,40 @@ const GameBoard = (ship) => {
 
 const Player = () => {
 
+    function genCharArray(charA, charZ) {
+        var a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
+        for (; i <= j; ++i) {
+            a.push(String.fromCharCode(i));
+        }
+        return a;
+    }
+    const validMoves = genCharArray("A", "J");
+    const newValidMoves = validMoves.map((arr, idx) => arr+String(idx+1));
+    console.log(newValidMoves);
+
+    const playerControl = () => {
+        const assignedBoard = 0;
+
+    };
+
+    const computerControl = () => {
+        const assignedBoard = 1;
+
+    };
+
+
+
+    return {
+        playerControl,
+        computerControl
+    }
+
 };
 
 module.exports = {
     GameBoard,
     Ship,
+    Player,
 }
 
 // 10 * 10 grid
