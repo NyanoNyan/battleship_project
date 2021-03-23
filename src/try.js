@@ -8,7 +8,11 @@ const Ship = (name, placedLoc, length) => {
     // takes a number and marks that position as a "hit"
     const hit = (hitLoc) => {
         hits.push(hitLoc);  
-    }
+    };
+    
+    const setCoord = (coordinates) => {
+        placedLoc = coordinates;
+    };
 
     // Calculates based on it's length and whether all of the position
     // of that particular shit have been hit.
@@ -40,6 +44,7 @@ const Ship = (name, placedLoc, length) => {
         getPlaceLoc,
         getLength,
         getHits,
+        setCoord,
     }
 
 };
@@ -68,21 +73,32 @@ const GameBoard = (ship) => {
     // the "hit" function to the correct ship.
     // Or it records the coordinates of the missed shot.
     const receiveAttack = (coordinates) => {
-        shipss.filter((obj) => {
+        let check = false;
+        shipsObjs.filter((obj) => {
             if (obj.getPlaceLoc().includes(coordinates)){
                 obj.hit(coordinates);
-                return obj.getPlaceLoc();
+                check = true;
+            } else {
+                check = false;
+                missedShots.push(coordinates);
             }
         })
+        return check;
     };
 
     const checkAllSunk = () => {
-
+        let sunkArray = [];
+        shipsObjs.map((obj) => {
+            sunkArray.push(obj.isSunk());
+        })
+        
+        return sunkArray.every(arr => arr === true);
     };
 
     return {
         placeShips,
         receiveAttack,
+        checkAllSunk
     }
 
 };
