@@ -80,14 +80,14 @@ describe("GameBoard Checks", () => {
         });
         test("Check array if all are not sunk", () => {
             const board = GameBoard()
-            board.placeShips("Cruiser", ["A1", "A6", "A3"], 3);
+            board.placeShips("Cruiser", ["A1", "A2", "A3"], 3);
             board.placeShips("Cruiser", ["A5", "A6", "A7"], 3);
             board.receiveAttack("A1");
             board.receiveAttack("A2");
             board.receiveAttack("A3");
 
             board.receiveAttack("A5");
-            board.receiveAttack("A6");
+            board.receiveAttack("A9");
             board.receiveAttack("A7");
             expect(board.checkAllSunk()).toEqual(false);
         });
