@@ -36,11 +36,60 @@ describe("Ships Checks", () => {
 })
 
 describe("GameBoard Checks", () => {
+    
     describe("place ships check", () => {
         test("Create new object ships", () => {
             const board = GameBoard()
             const showShips = board.placeShips("Cruiser", ["A1", "A2", "A3"], 3);
             expect(showShips[0].getPlaceLoc()).toEqual(["A1", "A2", "A3"]);
+        });
+        test("Set coordinates check", () => {
+            const board = GameBoard()
+            const showShips = board.placeShips("Cruiser", ["A1", "A2", "A3"]);
+            showShips[0].setCoord(["A1", "A2"]);
+            expect(showShips[0].getPlaceLoc()).toEqual(["A1", "A2"]);
         })
+    })
+
+    describe("receiveAttack function check", () => {
+        test("Check if it's been hit", () => {
+            const board = GameBoard()
+            const showShips = board.placeShips("Cruiser", ["A1", "A2", "A3"], 3);
+            expect(board.receiveAttack("A1")).toEqual(true)
+        });
+        test("Check if it's not been hit", () => {
+            const board = GameBoard()
+            const showShips = board.placeShips("Cruiser", ["A1", "A2", "A3"], 3);
+            expect(board.receiveAttack("A8")).toEqual(false)
+        })
+    })
+
+    describe("check if all ships are sunk", () => {
+        test("Check array if all are sunk", () => {
+            const board = GameBoard()
+            board.placeShips("Cruiser", ["A1", "A2", "A3"], 3);
+            board.placeShips("Cruiser", ["A5", "A6", "A7"], 3);
+            board.receiveAttack("A1");
+            board.receiveAttack("A2");
+            board.receiveAttack("A3");
+
+            board.receiveAttack("A5");
+            board.receiveAttack("A6");
+            board.receiveAttack("A7");
+            expect(board.checkAllSunk()).toEqual(true);
+        });
+        test("Check array if all are not sunk", () => {
+            const board = GameBoard()
+            board.placeShips("Cruiser", ["A1", "A6", "A3"], 3);
+            board.placeShips("Cruiser", ["A5", "A6", "A7"], 3);
+            board.receiveAttack("A1");
+            board.receiveAttack("A2");
+            board.receiveAttack("A3");
+
+            board.receiveAttack("A5");
+            board.receiveAttack("A6");
+            board.receiveAttack("A7");
+            expect(board.checkAllSunk()).toEqual(false);
+        });
     })
 })
