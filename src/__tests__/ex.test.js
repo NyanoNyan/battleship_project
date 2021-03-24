@@ -1,4 +1,4 @@
-const { Ship, GameBoard } = require("../try");
+const { Ship, GameBoard, Player } = require("../try");
 
 
 describe("Ships Checks", () => {
@@ -93,3 +93,22 @@ describe("GameBoard Checks", () => {
         });
     })
 })
+
+describe("Player section", () => {
+    describe("Check computer actions", () => {
+        test("Checking if random move is valid", () => {
+            const compPlayer = Player();
+            const compVal = [];
+
+            for (let i = 0; i < 100; i++) {
+                compVal.push(compPlayer.computerControl());
+            }
+
+            let uniqueItem = new Set(compVal);
+            console.log(uniqueItem);
+            console.log(uniqueItem.size);
+
+        })
+    })
+})
+// Need to check why only 66 unique items
