@@ -112,8 +112,15 @@ const Player = () => {
         return a;
     }
     const validMoves = genCharArray("A", "J");
-    const newValidMoves = validMoves.map((arr, idx) => arr+String(idx+1));
-    console.log(newValidMoves);
+    const setUpMoves = validMoves.map((arr) => {
+        let store = [];
+        for (let i = 1; i < 11; i++) {
+            store.push(arr+String(i));
+        }
+        return store;
+    });
+    const newValidMoves = [].concat(...setUpMoves);
+    // console.log(newValidMoves);
 
     const playerControl = () => {
         const assignedBoard = 0;
@@ -122,14 +129,18 @@ const Player = () => {
 
     const computerControl = () => {
         const assignedBoard = 1;
-
+        const randomPick = newValidMoves[Math.floor(Math.random()* newValidMoves.length)];
+        newValidMoves.filter((item) => item !== randomPick);
+        console.log(newValidMoves)
+        return randomPick;
     };
 
 
 
     return {
         playerControl,
-        computerControl
+        computerControl,
+        genCharArray
     }
 
 };
@@ -154,3 +165,5 @@ const shipOrder = ["Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"]
 
 /// comparing two arrays in JavaScript
 // https://www.30secondsofcode.org/blog/s/javascript-array-comparison
+
+// Flattening multi-dimensional array
