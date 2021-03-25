@@ -1,4 +1,4 @@
-const { Ship, GameBoard, Player } = require("../try");
+const { Ship, GameBoard, Player } = require("../logic_scripts");
 
 
 describe("Ships Checks", () => {
@@ -96,17 +96,19 @@ describe("GameBoard Checks", () => {
 
 describe("Player section", () => {
     describe("Check computer actions", () => {
-        test("Checking if random move is valid", () => {
+        test("Checking if moves are all unique", () => {
             const compPlayer = Player();
             const compVal = [];
 
             for (let i = 0; i < 100; i++) {
-                compVal.push(compPlayer.computerControl());
+                compVal.push(compPlayer.computerMove());
             }
 
             let uniqueItem = new Set(compVal);
-            console.log(uniqueItem);
-            console.log(uniqueItem.size);
+            // console.log(uniqueItem);
+            // console.log(uniqueItem.size);
+
+            expect(uniqueItem.size).toEqual(100);
 
         })
     })
