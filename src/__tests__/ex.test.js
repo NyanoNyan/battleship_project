@@ -1,5 +1,7 @@
-const { Ship, GameBoard, Player } = require("../logic_scripts");
-
+// const { Ship, GameBoard, Player } = require("../logic_scripts");
+import Ship from "../factory_functions/ship";
+import GameBoard from "../factory_functions/gameboard";
+import Player from "../factory_functions/player";
 
 describe("Ships Checks", () => {
 
