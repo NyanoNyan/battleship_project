@@ -1,0 +1,8 @@
+.main-board {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+}
+
+
+/* Grid cheat sheet: https://grid.malven.co/ */
