@@ -1,12 +1,15 @@
+import "../styles/DisplayBoard.css";
+import createValidMoves from "../factory_functions/createValidMoves";
 
-import "../styles/DisplayBoard.css"
 const DispalyBoard = () => {
 
-    let test = [];
-
+    let coordEle = [];
+    const validMoves = createValidMoves("A", "J");
     for (let i = 0; i < 100; i++) {
-        test.push((
-            <Square />
+        coordEle.push((
+            <Square 
+                coordVal = {validMoves[i]}
+            />
         ))
     }
 
@@ -14,16 +17,21 @@ const DispalyBoard = () => {
         <div>
             <div>I'm Inside DisplayBoard</div>
             <div className="main-board">
-                {test}
+                <div className="board-types" id="computer-board">
+                    {coordEle}
+                </div>
+
             </div>
         </div>
 
     )
 };
 
-const Square = () => {
+const Square = (props) => {
+    const coordVal = props.coordVal;
     return (
-        <button className="square">
+        <button 
+            className="square" id={coordVal}>
         </button>
     )
 }
@@ -35,3 +43,4 @@ export default DispalyBoard;
 // How to make a grid using react, not repeatable using dom to insert elements etc. Is there a library?
 
 // But each ID inside square.
+// How to implement DOM manipulation module.
