@@ -1,4 +1,4 @@
-.main-board {
+.board-types {
     display: grid;
     grid-template-columns: repeat(10, 30px);
     grid-template-rows: repeat(10, 30px);
