@@ -1,9 +1,16 @@
 import DispalyBoard from "./components/DisplayBoard.js"
 
 const App = () => {
+
+  const onClick = (e) => {
+    e.target.textContent = "X"
+  }
+
   return (
     <div>
-      <DispalyBoard />
+      <DispalyBoard 
+        onClick = {onClick}
+      />
     </div>
   )
 }
