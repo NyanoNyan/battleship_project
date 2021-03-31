@@ -1,14 +1,23 @@
 import "../styles/DisplayBoard.css";
 import createValidMoves from "../factory_functions/createValidMoves";
 
-const DispalyBoard = () => {
-
-    let coordEle = [];
+const DispalyBoard = (props) => {
+    const {onClick} = props;
+    let compBoard = [];
+    let playerBoard = [];
     const validMoves = createValidMoves("A", "J");
     for (let i = 0; i < 100; i++) {
-        coordEle.push((
+        compBoard.push((
             <Square 
                 coordVal = {validMoves[i]}
+                onClick = {onClick}
+            />
+        ));
+
+        playerBoard.push((
+            <Square 
+                coordVal = {validMoves[i]}
+                onClick = {onClick}
             />
         ))
     }
@@ -18,7 +27,11 @@ const DispalyBoard = () => {
             <div>I'm Inside DisplayBoard</div>
             <div className="main-board">
                 <div className="board-types" id="computer-board">
-                    {coordEle}
+                    {compBoard}
+                </div>
+
+                <div className="board-types" id="player-board">
+                    {playerBoard}
                 </div>
 
             </div>
@@ -28,10 +41,10 @@ const DispalyBoard = () => {
 };
 
 const Square = (props) => {
-    const coordVal = props.coordVal;
+    const {coordVal, onClick } = props;
     return (
         <button 
-            className="square" id={coordVal}>
+            className="square" id={coordVal} onClick={(e) => onClick(e)}>
         </button>
     )
 }
