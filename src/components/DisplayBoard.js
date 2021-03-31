@@ -1,7 +1,7 @@
 import "../styles/DisplayBoard.css";
 import createValidMoves from "../factory_functions/createValidMoves";
 
-const DispalyBoard = (props) => {
+const DisplayBoard = (props) => {
     const {onClick} = props;
     let compBoard = [];
     let playerBoard = [];
@@ -49,7 +49,7 @@ const Square = (props) => {
     )
 }
 
-export default DispalyBoard;
+export default DisplayBoard;
 
 
 // Material UI Grid?

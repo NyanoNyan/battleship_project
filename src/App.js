@@ -1,4 +1,4 @@
-import DispalyBoard from "./components/DisplayBoard.js"
+import DisplayBoard from "./components/DisplayBoard.js"
 
 const App = () => {
 
@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <div>
-      <DispalyBoard 
+      <DisplayBoard 
         onClick = {onClick}
       />
     </div>
