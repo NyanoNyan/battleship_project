@@ -1,8 +1,22 @@
-.board-types {
-    display: grid;
-    grid-template-columns: repeat(10, 30px);
-    grid-template-rows: repeat(10, 30px);
+.main-board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: auto;
 }
 
+.board-types {
+    display: grid;
+    grid-template-columns: repeat(10, 37px);
+    grid-template-rows: repeat(10, 37px);
+    margin: auto;
+    padding-top: 10%;
+}
+
+.square {
+    text-align: center;
+    color: black;
+    border: 2px solid rgb(17, 143, 211); /* Green */
+}
 
 /* Grid cheat sheet: https://grid.malven.co/ */
