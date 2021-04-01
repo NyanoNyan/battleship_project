@@ -13,6 +13,10 @@
     padding-top: 10%;
 }
 
+#computer-board{
+    pointer-events: none
+}
+
 .square {
     text-align: center;
     color: black;
