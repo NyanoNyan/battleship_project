@@ -22,15 +22,22 @@ const GameBoard = (ship) => {
     // determines whether or not not the attack hit and sends
     // the "hit" function to the correct ship.
     // Or it records the coordinates of the missed shot.
+
+    /////////
+    // Need to fix this loop, it's not stopping/breaking when it finds coordinate which match
+    // which should return true for all and should return not true if it's not in.
+    ////////
     const receiveAttack = (coordinates) => {
         let check = false;
         shipsObjs.filter((obj) => {
             if (obj.getPlaceLoc().includes(coordinates)) {
                 obj.hit(coordinates);
+                console.log("true")
                 check = true;
             } else {
-                check = false;
                 missedShots.push(coordinates);
+                console.log("false")
+                check = false;
             }
         });
         return check;
