@@ -63,6 +63,12 @@ describe("GameBoard Checks", () => {
             const board = GameBoard()
             const showShips = board.placeShips("Cruiser", ["A1", "A2", "A3"], 3);
             expect(board.receiveAttack("A8")).toEqual(false)
+        });
+        test("Testing hit for DOM", () => {
+            const board = GameBoard()
+            const showShips = board.placeShips("Cruiser", ["A1", "A2", "A3"], 3);
+            const test = board.receiveAttack("A1");
+            expect(test).toEqual(true);
         })
     })
 
