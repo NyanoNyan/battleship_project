@@ -29,17 +29,17 @@ const GameBoard = (ship) => {
     ////////
     const receiveAttack = (coordinates) => {
         let check = false;
-        shipsObjs.filter((obj) => {
-            if (obj.getPlaceLoc().includes(coordinates)) {
-                obj.hit(coordinates);
-                console.log("true")
+
+        for (let i = 0; i < shipsObjs.length; i++) {
+            if (shipsObjs[i].getPlaceLoc().includes(coordinates)) {
+                shipsObjs[i].hit(coordinates);
                 check = true;
+                break;
             } else {
                 missedShots.push(coordinates);
-                console.log("false")
-                check = false;
             }
-        });
+        }
+
         return check;
     };
 
