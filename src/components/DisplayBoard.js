@@ -24,14 +24,21 @@ const DisplayBoard = (props) => {
 
     return (
         <div>
-            <div>I'm Inside DisplayBoard</div>
+            <div>Batleship Project</div>
             <div className="main-board">
-                <div className="board-types" id="computer-board">
-                    {compBoard}
-                </div>
+                <div id="computer-board">
+                    <p className="board-heading">Computer Board</p>
+                    <div className="board-types">
+                        {compBoard}
+                    </div>
 
-                <div className="board-types" id="player-board">
-                    {playerBoard}
+                </div>
+                <div id="player-board">
+                    <p className="board-heading">Player Board</p>
+                    <div className="board-types">
+                        {playerBoard}
+                    </div>
+
                 </div>
 
             </div>
