@@ -19,6 +19,8 @@ const GameBoard = (ship) => {
         return shipsObjs;
     };
 
+    const showShips = () => shipsObjs;
+
     // determines whether or not not the attack hit and sends
     // the "hit" function to the correct ship.
     // Or it records the coordinates of the missed shot.
@@ -55,6 +57,7 @@ const GameBoard = (ship) => {
         placeShips,
         receiveAttack,
         checkAllSunk,
+        showShips,
     };
 };
 
