@@ -2,15 +2,29 @@ import "../styles/DisplayBoard.css";
 import createValidMoves from "../factory_functions/createValidMoves";
 
 const DisplayBoard = (props) => {
-    const {onClick} = props;
+    const {onClick, compShips} = props;
     let compBoard = [];
     let playerBoard = [];
+    let colourH = "gray";
+    let colourP = "none";
     const validMoves = createValidMoves("A", "J");
     for (let i = 0; i < 100; i++) {
+        // Checks coordinate match to set colour highlight for computer board
+        for (let j = 0; j < compShips.length; j++) {
+            if (compShips[j].getPlaceLoc().includes(validMoves[i])) {
+                colourH = "#73ff8e";
+                break;
+            } else {
+                colourH = "none";
+            }
+        };
+
+        // console.log(colourH);
         compBoard.push((
             <Square 
                 coordVal = {validMoves[i]}
                 onClick = {onClick}
+                colourH = {colourH}
             />
         ));
 
@@ -18,9 +32,17 @@ const DisplayBoard = (props) => {
             <Square 
                 coordVal = {validMoves[i]}
                 onClick = {onClick}
+                colourH = {colourP}
             />
         ))
-    }
+    };
+
+    const compShowShips = () => {
+
+    };
+
+    console.log(compBoard);
+    console.log(compShips)
 
     return (
         <div>
@@ -48,10 +70,13 @@ const DisplayBoard = (props) => {
 };
 
 const Square = (props) => {
-    const {coordVal, onClick } = props;
+    const {coordVal, onClick, colourH } = props;
+    console.log(colourH);
     return (
         <button 
-            className="square" id={coordVal} onClick={(e) => onClick(e)}>
+            className="square" id={coordVal} 
+            style={{backgroundColor: colourH}} 
+            onClick={(e) => onClick(e)}>
         </button>
     )
 }
