@@ -11,8 +11,9 @@ const App = () => {
     const [winner, setWinner] = useState("");
 
     useEffect(() => {
-      checkWinner();
+      console.log(winner)
     }, [winner]);
+
     // When a players selects a box to commence an attack.
     const onClick = (e) => {
         // Player Move
@@ -25,7 +26,8 @@ const App = () => {
         e.target.style.pointerEvents = "none";
 
         compMove();
-        console.log(newGameBoardP.checkAllSunk());
+        checkWinner();
+        // console.log(newGameBoardP.checkAllSunk());
     };
 
     // Random Computer Move
@@ -46,8 +48,8 @@ const App = () => {
       } else if (newGameBoardC.checkAllSunk() === true) {
         setWinner("Computer wins!")
       }
-  
-    }
+    };
+
 
     const setUpBoard = () => {
         // Player Board Set up
@@ -74,7 +76,8 @@ const App = () => {
     return (
         <div>
             <DisplayBoard onClick={onClick} />
-            <p> {console.log(winner)} </p>
+            <p> {winner} </p>
+            
         </div>
     );
 };
