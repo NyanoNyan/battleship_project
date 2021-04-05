@@ -75,7 +75,7 @@ const App = () => {
   
     return (
         <div>
-            <DisplayBoard onClick={onClick} />
+            <DisplayBoard onClick={onClick} compShips={newGameBoardC.showShips()} />
             <p> {winner} </p>
             
         </div>
