@@ -11,7 +11,7 @@ const App = () => {
     const [winner, setWinner] = useState("");
 
     useEffect(() => {
-      console.log(winner)
+      // console.log(winner)
     }, [winner]);
 
     // When a players selects a box to commence an attack.
@@ -39,14 +39,17 @@ const App = () => {
         if (newGameBoardC.receiveAttack(compMove) === true) {
             eleComp.style.background = "red";
         }
-        console.log(eleComp);
     };
 
     const checkWinner = () => {
+      const playerBoard = document.getElementById("player-board");
       if (newGameBoardP.checkAllSunk() === true) {
+        playerBoard.style.pointerEvents = "none";
         setWinner("Player wins!");
+
       } else if (newGameBoardC.checkAllSunk() === true) {
-        setWinner("Computer wins!")
+        playerBoard.style.pointerEvents = "none";
+        setWinner("Computer wins!");
       }
     };
 
@@ -77,9 +80,13 @@ const App = () => {
         <div>
             <DisplayBoard onClick={onClick} compShips={newGameBoardC.showShips()} />
             <p> {winner} </p>
-            
+            <button>Restart Game?</button>
         </div>
     );
 };
 
 export default App;
+
+// Things that needs to be completed
+// - Restart the game
+// - Random ships placements for both computer and player (optional)
