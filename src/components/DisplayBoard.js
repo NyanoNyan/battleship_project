@@ -37,12 +37,8 @@ const DisplayBoard = (props) => {
         ))
     };
 
-    const compShowShips = () => {
-
-    };
-
-    console.log(compBoard);
-    console.log(compShips)
+    // console.log(compBoard);
+    // console.log(compShips)
 
     return (
         <div>
@@ -71,7 +67,6 @@ const DisplayBoard = (props) => {
 
 const Square = (props) => {
     const {coordVal, onClick, colourH } = props;
-    console.log(colourH);
     return (
         <button 
             className="square" id={coordVal} 
