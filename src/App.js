@@ -9,6 +9,7 @@ import Player from "../src/factory_functions/player";
 const App = () => {
     const [isSetUp, setIsSetUp] = useState(false);
     const [winner, setWinner] = useState("");
+    const [isRestart, setIsRestart] = useState(false);
 
     useEffect(() => {
       // console.log(winner)
@@ -28,6 +29,12 @@ const App = () => {
         compMove();
         checkWinner();
         // console.log(newGameBoardP.checkAllSunk());
+    };
+
+    const onRestart = (e) => {
+      console.log("hello")
+      alert("I'm on restart");
+      setIsRestart(true);
     };
 
     // Random Computer Move
@@ -70,17 +77,28 @@ const App = () => {
     };
 
     // Set up Game
-    const newGameBoardP = GameBoard();
-    const newGameBoardC = GameBoard();
-    const newPlayers = Player();
+    // Need to figure out how to restart the game
+    let newGameBoardP = GameBoard();
+    let newGameBoardC = GameBoard();
+    let newPlayers = Player();
+
+    if (isRestart) {
+      console.log(isRestart)
+      newGameBoardP = GameBoard();
+      newGameBoardC = GameBoard();
+      newPlayers = Player();
+      setIsRestart(false);
+    };
+
     setUpBoard();
+
 
   
     return (
         <div>
             <DisplayBoard onClick={onClick} compShips={newGameBoardC.showShips()} />
             <p> {winner} </p>
-            <button>Restart Game?</button>
+            <button onClick={(e)=> onRestart(e)}>Restart Game?</button>
         </div>
     );
 };
