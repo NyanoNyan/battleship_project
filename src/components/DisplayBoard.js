@@ -2,6 +2,34 @@ import "../styles/DisplayBoard.css";
 import createValidMoves from "../factory_functions/createValidMoves";
 
 const DisplayBoard = (props) => {
+    const {onClick, compShips, isRestart} = props;
+    console.log(`isRestart: ${isRestart}`)
+    if (isRestart === true) {
+        return (
+            <div>Hello</div>
+        )
+    } else {
+        return (
+            <BoardBuilder 
+                onClick = {onClick}
+                compShips = {compShips}
+            />
+        )
+    }
+};
+
+const Square = (props) => {
+    const {coordVal, onClick, colourH } = props;
+    return (
+        <button 
+            className="square" id={coordVal} 
+            style={{backgroundColor: colourH}} 
+            onClick={(e) => onClick(e)}>
+        </button>
+    )
+}
+
+const BoardBuilder = (props) => {
     const {onClick, compShips} = props;
     let compBoard = [];
     let playerBoard = [];
@@ -46,14 +74,14 @@ const DisplayBoard = (props) => {
             <div className="main-board">
                 <div id="computer-board">
                     <p className="board-heading">Computer Board</p>
-                    <div className="board-types">
+                    <div id= "computer-board-squares" className="board-types">
                         {compBoard}
                     </div>
 
                 </div>
                 <div id="player-board">
                     <p className="board-heading">Player Board</p>
-                    <div className="board-types">
+                    <div id= "player-board-squares" className="board-types">
                         {playerBoard}
                     </div>
 
@@ -62,17 +90,6 @@ const DisplayBoard = (props) => {
             </div>
         </div>
 
-    )
-};
-
-const Square = (props) => {
-    const {coordVal, onClick, colourH } = props;
-    return (
-        <button 
-            className="square" id={coordVal} 
-            style={{backgroundColor: colourH}} 
-            onClick={(e) => onClick(e)}>
-        </button>
     )
 }
 
