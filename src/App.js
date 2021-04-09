@@ -31,10 +31,30 @@ const App = () => {
         // console.log(newGameBoardP.checkAllSunk());
     };
 
-    const onRestart = (e) => {
+    const onRestart = () => {
+
+      // Fix this issue, why is console logging false, should change to true
       console.log("hello")
-      alert("I'm on restart");
       setIsRestart(true);
+      console.log(`state change check ${isRestart}`);
+
+      // const elePlayer = document.getElementById("player-board-squares");
+      // const eleComp = document.getElementById("computer-board-squares");
+      // const playerNodes = [...elePlayer.childNodes];
+      // const compNodes = [...eleComp.childNodes];
+
+      // for (let i = 0; i < playerNodes.length; i++ ) {
+      //   if (playerNodes[i].style.background.includes("red")) {
+      //     playerNodes[i].style.background = "";
+      //     playerNodes[i].textContent = "";
+      //   } else if (compNodes[i].style.background.includes("red")) {
+      //     console.log(compNodes[i].style.background)
+      //     compNodes[i].style.background = "";
+      //     compNodes[i].textContent = "";
+      //   }
+      // };
+
+
     };
 
     // Random Computer Move
@@ -88,6 +108,10 @@ const App = () => {
       newGameBoardC = GameBoard();
       newPlayers = Player();
       setIsRestart(false);
+      let tt = newGameBoardP.showShips();
+      let pp = tt.filter((val) => val.getPlaceLoc());
+      // console.log(pp);
+
     };
 
     setUpBoard();
@@ -96,9 +120,13 @@ const App = () => {
   
     return (
         <div>
-            <DisplayBoard onClick={onClick} compShips={newGameBoardC.showShips()} />
+            <DisplayBoard 
+              onClick={onClick} 
+              compShips={newGameBoardC.showShips()} 
+              isRestart={isRestart}
+            />
             <p> {winner} </p>
-            <button onClick={(e)=> onRestart(e)}>Restart Game?</button>
+            <button onClick={onRestart}>Restart Game?</button>
         </div>
     );
 };
