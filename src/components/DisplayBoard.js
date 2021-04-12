@@ -4,6 +4,13 @@ import createValidMoves from "../factory_functions/createValidMoves";
 const DisplayBoard = (props) => {
     const {onClick, compShips, isRestart} = props;
     console.log(`isRestart: ${isRestart}`)
+    let newBoard = (
+        <BoardBuilder 
+            onClick = {onClick}
+            compShips = {compShips}
+        />
+    );
+
     if (isRestart === true) {
         return (
             <div>Hello</div>
