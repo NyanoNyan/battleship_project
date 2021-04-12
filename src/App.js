@@ -13,7 +13,11 @@ const App = () => {
 
     useEffect(() => {
       // console.log(winner)
-    }, [winner]);
+      if (isRestart === true) {
+        alert("why, hello there")
+      }
+
+    }, [isRestart]);
 
     // When a players selects a box to commence an attack.
     const onClick = (e) => {
@@ -107,19 +111,19 @@ const App = () => {
       newGameBoardP = GameBoard();
       newGameBoardC = GameBoard();
       newPlayers = Player();
-      setIsRestart(false);
-      let tt = newGameBoardP.showShips();
-      let pp = tt.filter((val) => val.getPlaceLoc());
-      // console.log(pp);
+      // setIsRestart(false);
 
     };
 
     setUpBoard();
+    let tt = newGameBoardP.showHits();
+    console.log(`This it the ships hits ${tt}`);
 
 
   
     return (
         <div>
+            {console.log(isRestart)}
             <DisplayBoard 
               onClick={onClick} 
               compShips={newGameBoardC.showShips()} 
@@ -136,3 +140,7 @@ export default App;
 // Things that needs to be completed
 // - Restart the game
 // - Random ships placements for both computer and player (optional)
+
+// learn more about useEffect
+// test why hitLocs is not showing
+// Look at other codes for inspiration
