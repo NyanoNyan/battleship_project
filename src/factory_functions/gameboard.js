@@ -20,6 +20,11 @@ const GameBoard = (ship) => {
     };
 
     const showShips = () => shipsObjs;
+    const showHits = () => {
+        let store = shipsObjs.map((obj) => obj.getHits());
+
+        return store;
+    };
 
     // determines whether or not not the attack hit and sends
     // the "hit" function to the correct ship.
@@ -58,6 +63,7 @@ const GameBoard = (ship) => {
         receiveAttack,
         checkAllSunk,
         showShips,
+        showHits,
     };
 };
 
