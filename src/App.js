@@ -10,6 +10,8 @@ const App = () => {
     const [isSetUp, setIsSetUp] = useState(false);
     const [winner, setWinner] = useState("");
     const [isRestart, setIsRestart] = useState(false);
+    const [playerBoard, setPlayerBoard] = useState("");
+    const [computerBoard, setComputerBoard] = useState("");
 
     useEffect(() => {
       // console.log(winner)
@@ -25,8 +27,9 @@ const App = () => {
         e.target.textContent = "X";
         let isHitP = newGameBoardP.receiveAttack(e.target.id);
 
+        //// -------Issue here when setting the hit background colour ,need to make diagram for the design-----////
         if (isHitP === true) {
-            e.target.style.background = "red";
+            e.target.style.backgroundColor = "red";
         }
         e.target.style.pointerEvents = "none";
 
@@ -41,6 +44,10 @@ const App = () => {
       console.log("hello")
       setIsRestart(true);
       console.log(`state change check ${isRestart}`);
+      const newGameBoardP = GameBoard();
+      const newGameBoardC = GameBoard(); 
+      resetBoard(document.getElementById("computer-board-squares").childNodes, "comp");
+      resetBoard(document.getElementById("player-board-squares").childNodes, "player");
 
       // const elePlayer = document.getElementById("player-board-squares");
       // const eleComp = document.getElementById("computer-board-squares");
@@ -60,6 +67,17 @@ const App = () => {
 
 
     };
+
+    const resetBoard = (board, type) => {
+      for (let i = 0; i < board.length; i++) {
+        board[i].textContent = "";
+        board[i].style.backgroundColor = "#cecece";
+
+        if (type ==="player") {
+          board[i].style.pointerEvents = "auto";
+        };
+      }
+    }
 
     // Random Computer Move
     const compMove = () => {
