@@ -7,4 +7,4 @@
 
 Reference of the game:
 - http://en.battleship-game.org/
-- https://en.wikipedia.org/wiki/Battleship_(game)#/media/File:Battleships_Paper_Game.svg
+- https://en.wikipedia.org/wiki/Battleship_(game)
