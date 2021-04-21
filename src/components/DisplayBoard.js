@@ -11,18 +11,20 @@ const DisplayBoard = (props) => {
         />
     );
 
-    if (isRestart === true) {
-        return (
-            <div>Hello</div>
-        )
-    } else {
-        return (
-            <BoardBuilder 
-                onClick = {onClick}
-                compShips = {compShips}
-            />
-        )
-    }
+    return newBoard;
+
+    // if (isRestart === true) {
+    //     return (
+    //         <div>Hello</div>
+    //     )
+    // } else {
+    //     return (
+    //         <BoardBuilder 
+    //             onClick = {onClick}
+    //             compShips = {compShips}
+    //         />
+    //     )
+    // }
 };
 
 const Square = (props) => {
@@ -77,7 +79,7 @@ const BoardBuilder = (props) => {
 
     return (
         <div>
-            <div>Batleship Project</div>
+            <div>Battleship Project</div>
             <div className="main-board">
                 <div id="computer-board">
                     <p className="board-heading">Computer Board</p>
