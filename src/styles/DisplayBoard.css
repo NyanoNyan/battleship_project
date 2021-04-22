@@ -17,20 +17,29 @@
     pointer-events: none
 }
 
-.square {
-    text-align: center;
-    color: black;
-    border: 2px solid rgb(17, 143, 211); /* Green */
+.square-bg {
+    background-color: rgb(159, 142, 203);
 }
 
 .square:hover {
     background-color: white;
 }
 
+.square {
+    text-align: center;
+    color: black;
+    border: 2px solid rgb(8, 82, 121); /* Green */
+}
+
+
 .board-heading {
     display: grid;
 }
 
+h3 {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
 
 /* Grid cheat sheet: https://grid.malven.co/ */
