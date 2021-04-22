@@ -8,6 +8,7 @@ import Player from "../src/factory_functions/player";
 
 const App = () => {
 
+  // Deals with setting up the game //
     return (
       <DisplayBoard />
     )
