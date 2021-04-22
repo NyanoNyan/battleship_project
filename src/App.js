@@ -29,11 +29,23 @@ const App = () => {
     gameBoardP = GameBoard();
     gameBoardC = GameBoard();
     setIsRestart(true);
+    resetColours()
   }
+
+  const resetColours = () => {
+    const compBoardEle = document.getElementById("computer-board-squares").childNodes;
+    let playerBoardEle = [ ...document.getElementById("player-board-squares").childNodes];
+    
+    playerBoardEle.map((item) => {
+      item.className="square square-bg"
+      item.textContent = ""
+    });
+  };
 
   const markCoord = (e) => {
     if (e.target.className === "square square-bg") {
       e.target.className = "square square-bg2"
+      e.target.textContent = "X";
     }
   }
 
@@ -51,6 +63,7 @@ const App = () => {
       <div >
             <DisplayBoard 
               markCoord = {markCoord}
+              compShips = {gameBoardC.showShips()}
             />
             <p> {winner} </p>
             <button onClick={restartBoard}>Restart Game?</button>
