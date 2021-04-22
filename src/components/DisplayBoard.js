@@ -2,23 +2,24 @@ import "../styles/DisplayBoard.css";
 import createValidMoves from "../factory_functions/createValidMoves";
 
 const DisplayBoard = (props) => {
-    const { markCoord } = props;
+    const { markCoord, compShips } = props;
     return (
         <div>
             <h3> Battleship Project</h3>
             <div className="main-board">
                 <div id="computer-board">
                     <p className="board-heading">Computer Board</p>
-                    <div className="board-types"> 
+                    <div id= "computer-board-squares" className="board-types"> 
                         <CreateBoard 
                             markCoord = {markCoord}
+                            compShips = {compShips}
                         />
                     </div>
                 </div>
 
                 <div id="player-board">
                     <p className="board-heading">Player Board</p>
-                    <div className="board-types">
+                    <div id= "player-board-squares" className="board-types">
                         <CreateBoard 
                             markCoord = {markCoord}
                         />
@@ -31,15 +32,34 @@ const DisplayBoard = (props) => {
 };
 
 const CreateBoard = (props) => {
-    const { markCoord } = props;
+    const { markCoord, compShips } = props;
     const validMoves = createValidMoves("A", "J");
-    let boardP = []
+    let compShipsHolder;
+    let classColour = "square square-bg";
+
+    if (compShips !== undefined) {
+        compShipsHolder = [ ...compShips];
+    }
+
+    console.log(compShipsHolder)
+    
+    let boardP = [];
     for (let i = 0; i < 100; i++) {
+        if (compShips !== undefined) {
+            // This might not be looping through the whole thing
+                classColour = compShipsHolder.map((obj) => {
+                if (obj.getPlaceLoc().includes(validMoves[i])) {
+                    return "square comp-show-ship-bg";
+                } else {
+                    return "square square-bg";
+                }
+            });
+        }
         boardP.push(
         <button 
             key= {i} 
             id={validMoves[i]}
-            className="square square-bg"
+            className={classColour}
             onClick={(e) => markCoord(e)}>
         </button>
         );
