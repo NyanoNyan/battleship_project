@@ -1,4 +1,4 @@
-@import-normalize; 
+/* @import-normalize;  */
 
 body {
     background-image: url("./battleship2.jpg");
@@ -6,4 +6,12 @@ body {
 
 .square-bg2 {
     background-color: red;
+}
+
+.square-bg {
+    background-color: rgb(159, 142, 203);
+}
+
+.comp-show-ship-bg {
+    background-color: "#73ff8e";
 }
