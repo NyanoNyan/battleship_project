@@ -23,19 +23,24 @@ const App = () => {
 
     // When a players selects a box to commence an attack.
     const onClick = (e) => {
-        // Player Move
-        e.target.textContent = "X";
-        let isHitP = newGameBoardP.receiveAttack(e.target.id);
 
-        //// -------Issue here when setting the hit background colour ,need to make diagram for the design-----////
-        if (isHitP === true) {
-            e.target.style.backgroundColor = "red";
+        if (e.target.className === "square"){
+          // Player Move
+          e.target.textContent = "X";
+          let isHitP = newGameBoardP.receiveAttack(e.target.id);
+
+          //// -------Issue here when setting the hit background colour ,need to make diagram for the design-----////
+          if (isHitP === true) {
+              e.target.style.backgroundColor = "red";
+          }
+          e.target.style.pointerEvents = "none";
+
+          compMove();
+          checkWinner();
+          // console.log(newGameBoardP.checkAllSunk());
+
         }
-        e.target.style.pointerEvents = "none";
 
-        compMove();
-        checkWinner();
-        // console.log(newGameBoardP.checkAllSunk());
     };
 
     const onRestart = () => {
@@ -48,7 +53,7 @@ const App = () => {
       const newGameBoardC = GameBoard(); 
       resetBoard(document.getElementById("computer-board-squares").childNodes, "comp");
       resetBoard(document.getElementById("player-board-squares").childNodes, "player");
-
+      setWinner("")
       // const elePlayer = document.getElementById("player-board-squares");
       // const eleComp = document.getElementById("computer-board-squares");
       // const playerNodes = [...elePlayer.childNodes];
