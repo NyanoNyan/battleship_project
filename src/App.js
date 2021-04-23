@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./styles/App.css";
 import DisplayBoard from "./components/DisplayBoard.js";
-
+import createValidMoves from "../src/factory_functions/createValidMoves";
 import Ship from "../src/factory_functions/ship";
 import GameBoard from "../src/factory_functions/gameboard";
 import Player from "../src/factory_functions/player";
@@ -26,37 +26,100 @@ const App = () => {
   };
 
   const restartBoard = (gameBoardP, gameBoardC) => {
+    const playerBoard = document.getElementById("player-board");
+    const winnerMsg = document.getElementById("winner-msg");
+
+    playerBoard.className = "add-pointer";
+    winnerMsg.textContent = "";
+
     gameBoardP = GameBoard();
     gameBoardC = GameBoard();
+
     setIsRestart(true);
     resetColours()
-  }
+  };
 
   const resetColours = () => {
-    const compBoardEle = document.getElementById("computer-board-squares").childNodes;
+    const validMoves = createValidMoves("A", "J");
+    const compBoardEle = [ ...document.getElementById("computer-board-squares").childNodes];
     let playerBoardEle = [ ...document.getElementById("player-board-squares").childNodes];
     
+    // Reset Player Board
     playerBoardEle.map((item) => {
       item.className="square square-bg"
       item.textContent = ""
     });
+
+    // Reset Computer Board
+    compBoardEle.map((item, idx) => {
+      for (let j = 0; j < gameBoardC.showShips().length; j++) {
+        if (gameBoardC.showShips()[j].getPlaceLoc().includes(validMoves[idx])) {
+            item.className = "square comp-show-ship-bg";
+            break;
+        } else {
+            item.className = "square square-bg";
+        }
+      };
+      item.textContent = "";
+    })
+
+    // reset comp
   };
 
   const markCoord = (e) => {
     if (e.target.className === "square square-bg") {
-      e.target.className = "square square-bg2"
-      e.target.textContent = "X";
-    }
-  }
+      let isHitP = gameBoardP.receiveAttack(e.target.id);
 
-  // Set up the Board
-  let gameBoardP = GameBoard();
-  let gameBoardC = GameBoard();
+      // Registers the hit and changes styles
+      if (isHitP) {
+        e.target.className = "square square-bg2"
+        e.target.textContent = "X";
+      } else {
+        e.target.className = "square no-pointer"
+      };
+    };
+
+    computerMove();
+    checkWinner();
+  };
+
+  const computerMove = () => {
+    const compMove = newPlayers.computerMove();
+    const eleComp = document.querySelector(`#${compMove}`);
+    eleComp.textContent = "X";
+
+    if (gameBoardC.receiveAttack(compMove) === true) {
+      eleComp.className = "square square-bg2"
+    };
+  };
+
+  const checkWinner = () => {
+    const playerBoard = document.getElementById("player-board");
+    if (gameBoardP.checkAllSunk() === true) {
+      playerBoard.className = "no-pointer";
+      setWinner("Player wins!");
+
+    } else if (gameBoardC.checkAllSunk() === true) {
+      playerBoard.className = "no-pointer";
+      setWinner("Computer wins!");
+    }
+  };
+
+  ///////////////////////////////////////
+
+  // Set up the Board //
+  const gameBoardP = GameBoard();
+  const gameBoardC = GameBoard();
   setUpBoard(gameBoardP, gameBoardC);
 
-  // Testing hits
+  // Set up Player //
+  const newPlayers = Player();
+
+  // Testing hits // 
   let tt = gameBoardP.showHits();
   console.log(tt[0]);
+
+  //////////////////////////////////////
 
   // Deals with setting up the game //
     return (
@@ -65,7 +128,7 @@ const App = () => {
               markCoord = {markCoord}
               compShips = {gameBoardC.showShips()}
             />
-            <p> {winner} </p>
+            <p id="winner-msg"> {winner} </p>
             <button onClick={restartBoard}>Restart Game?</button>
       </div>
 
