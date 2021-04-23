@@ -34,27 +34,23 @@ const DisplayBoard = (props) => {
 const CreateBoard = (props) => {
     const { markCoord, compShips } = props;
     const validMoves = createValidMoves("A", "J");
-    let compShipsHolder;
     let classColour = "square square-bg";
 
-    if (compShips !== undefined) {
-        compShipsHolder = [ ...compShips];
-    }
-
-    console.log(compShipsHolder)
-    
     let boardP = [];
     for (let i = 0; i < 100; i++) {
         if (compShips !== undefined) {
-            // This might not be looping through the whole thing
-                classColour = compShipsHolder.map((obj) => {
-                if (obj.getPlaceLoc().includes(validMoves[i])) {
-                    return "square comp-show-ship-bg";
+            // Highlighting the computer ships placements
+            for (let j = 0; j < compShips.length; j++) {
+                if (compShips[j].getPlaceLoc().includes(validMoves[i])) {
+                    classColour = "square comp-show-ship-bg";
+                    break;
                 } else {
-                    return "square square-bg";
+                    classColour = "square square-bg";
                 }
-            });
-        }
+            };
+        };
+        
+        // Push the board details in boardP
         boardP.push(
         <button 
             key= {i} 
